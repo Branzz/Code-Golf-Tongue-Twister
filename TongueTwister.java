@@ -23,10 +23,15 @@ v->"".format("S%sells by%s shells she sells are seashells, I'm sure.\nSo if s%1$
 		String[] used = new String[0];
 		
 		//For languages that can't use \n, input the text as an array split by the lines. TEXT.split("\n")
-		search(used, TEXT);
+		if (VERSION == Solution.C_SHARP)
+			search(used, TEXT.split("\n"));
+		else
+			search(used, TEXT);
 
 	}
 
+	//Change versions here:
+	private final static int VERSION = Solution.PYTHON3;
 	private final static String TEXT = "She sells seashells by the seashore,\nThe shells she sells are seashells, I'm sure.\nSo if she sells seashells on the seashore,\nThen I'm sure she sells seashore shells.";
 
 	private static ArrayList<Solution> solutions; //All solutions (Purpose: to check for repeat and not recheck entire branches)
@@ -36,7 +41,7 @@ v->"".format("S%sells by%s shells she sells are seashells, I'm sure.\nSo if s%1$
 
 	public static void search(String[] used, String...text) {
 
-		Solution solution = new Solution(used);
+		Solution solution = new Solution(VERSION, used);
 		for (Solution s : solutions)
 			if (s.compareTo(solution) == 0) {
 				return;
@@ -50,14 +55,15 @@ v->"".format("S%sells by%s shells she sells are seashells, I'm sure.\nSo if s%1$
 			minSize = solution.getSol().length();
 			shortest = new ArrayList<Solution>();
 			shortest.add(solution);
-			System.out.println(minSize + " " + shortest.get(0).getSol());
+			System.out.println(minSize + ":\n" + shortest.get(0).getSol());
 			System.out.println();
 		}
 		else if(solution.getSol().length() == minSize) {
 			minSize = solution.getSol().length();
 			shortest.add(solution);
+			System.out.println(minSize + ":");
 			for (Solution sol : shortest)
-			System.out.println(minSize + " " + sol.getSol());
+				System.out.println(sol.getSol());
 			System.out.println();
 		}
 
@@ -100,7 +106,7 @@ v->"".format("S%sells by%s shells she sells are seashells, I'm sure.\nSo if s%1$
 				else
 					i++;
 			}
-			bank.add(new PartValue(part, frequency));
+			bank.add(new PartValue(VERSION, part, frequency));
 		}
 
 		//To avoid checking paths that make a potentially longer or equal solution

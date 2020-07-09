@@ -5,8 +5,11 @@ public class Solution implements Comparable<Solution> {
 	private int size;
 	private String sol;
 	private final String TEXT = "She sells seashells by the seashore,\nThe shells she sells are seashells, I'm sure.\nSo if she sells seashells on the seashore,\nThen I'm sure she sells seashore shells.";
+	public final static int JAVA = 0;
+	public final static int C_SHARP = 1;
+	public final static int PYTHON3 = 2;
 
-	public Solution(String...parts) {
+	public Solution(int type, String...parts) {
 
 		for (int i = 0; i < parts.length - 1; i++)
 			for (int j = 0; j < parts.length - i - 1; j++)
@@ -16,16 +19,43 @@ public class Solution implements Comparable<Solution> {
 					parts[j+1] = temp; 
 				}
 		this.parts = parts;
-
 		String t = TEXT;
-		for (int i = 0; i < parts.length; i++)
-			for (int j = 0, count = 0; j < t.length() - parts[i].length(); j++)
-				if (t.substring(j, parts[i].length() + j).compareTo(parts[i]) == 0)
-					t = t.replaceFirst(parts[i], count++ > 0 ? "%" + (i + 1) + "\\$\\x" : "\\%\\x");
-		t += "\"";
-		for (String part : parts)
-			t += ",\"" + part + "\"";
-		sol = "v->\"\".format(\"" + t.replaceAll("\n", "\\\\n").replaceAll("x", "s") + ")";
+
+		switch (type) {
+		case JAVA : {
+			for (int i = 0; i < parts.length; i++)
+				for (int j = 0, count = 0; j < t.length() - parts[i].length(); j++)
+					if (t.substring(j, parts[i].length() + j).compareTo(parts[i]) == 0)
+						t = t.replaceFirst(parts[i], count++ > 0 ? "%" + (i + 1) + "\\$\\x" : "\\%\\x");
+			t += "\"";
+			for (String part : parts)
+				t += ",\"" + part + "\"";
+			sol = "v->\"\".format(\"" + t.replaceAll("\n", "\\\\n").replaceAll("x", "s") + ")";
+			break;
+		}
+		case C_SHARP : {
+			for (int i = 0; i < parts.length; i++)
+					t = t.replaceAll(parts[i], "{" + i + "}");
+			t += "\"";
+			for (String part : parts)
+				t += ",\"" + part + "\"";
+			sol = "Write(@\"" + t + ")";
+			break;
+		}
+		case PYTHON3 : { //replace them with corresponding symbol
+			for (int i = 0; i < parts.length; i++)
+				t = t.replaceAll(parts[i], "" + i);
+			t += "\".translate([\"";
+
+			if (parts.length > 0)
+				t += parts[0] + "\"";
+			for (int i = 1; i < parts.length; i++)
+				t += ",\"" + parts[i] + "\"";
+			sol = "print(\"" + t.replaceAll("\n", "\\\\n").replaceAll("0", "" + parts.length) + "]*2))";
+			break;
+		}
+		}
+
 	}
 
 	public int getSize() {
