@@ -3,13 +3,13 @@ import java.util.Arrays;
 
 public class TongueTwister {
 
-	interface N {
-		String c(Void v);
-	}
-
-	  static N n = 
-v->"".format("S%sells by%s shells she sells are seashells, I'm sure.\nSo if s%1$sells on%2$sn I'm sure s%1$sore shells.","he sells seash"," the seashore,\nThe")
-;
+//	interface N {
+//		String c(Void v);
+//	}
+//
+//	  static N n = 
+//v->"".format("S%sells by%s shells she sells are seashells, I'm sure.\nSo if s%1$sells on%2$sn I'm sure s%1$sore shells.","he sells seash"," the seashore,\nThe")
+//;
 
 	public static void main(String[] args) {
 
@@ -23,15 +23,21 @@ v->"".format("S%sells by%s shells she sells are seashells, I'm sure.\nSo if s%1$
 		String[] used = new String[0];
 		
 		//For languages that can't use \n, input the text as an array split by the lines. TEXT.split("\n")
-		if (VERSION == Solution.C_SHARP)
+		if (VERSION == C_SHARP)
 			search(used, TEXT.split("\n"));
 		else
 			search(used, TEXT);
 
 	}
 
-	//Change versions here: "JAVA", "C_SHARP", "PYTHON3"
-	private final static int VERSION = Solution.JAVA;
+	public final static int JAVA = 0;
+	public final static int C_SHARP = 1;
+	public final static int PYTHON2 = 2;
+	public final static int PYTHON3 = 3;
+
+	//Change versions here: "JAVA", "C_SHARP", etc.
+	private static int VERSION = PYTHON2;
+
 
 	private final static String TEXT = "She sells seashells by the seashore,\nThe shells she sells are seashells, I'm sure.\nSo if she sells seashells on the seashore,\nThen I'm sure she sells seashore shells.";
 

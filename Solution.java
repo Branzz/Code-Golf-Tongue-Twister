@@ -5,9 +5,6 @@ public class Solution implements Comparable<Solution> {
 	private int size;
 	private String sol;
 	private final String TEXT = "She sells seashells by the seashore,\nThe shells she sells are seashells, I'm sure.\nSo if she sells seashells on the seashore,\nThen I'm sure she sells seashore shells.";
-	public final static int JAVA = 0;
-	public final static int C_SHARP = 1;
-	public final static int PYTHON3 = 2;
 
 	public Solution(int type, String...parts) {
 
@@ -22,7 +19,7 @@ public class Solution implements Comparable<Solution> {
 		String t = TEXT;
 
 		switch (type) {
-		case JAVA : {
+		case TongueTwister.JAVA : {
 			for (int i = 0; i < parts.length; i++)
 				for (int j = 0, count = 0; j < t.length() - parts[i].length(); j++)
 					if (t.substring(j, parts[i].length() + j).compareTo(parts[i]) == 0)
@@ -33,7 +30,7 @@ public class Solution implements Comparable<Solution> {
 			sol = "v->\"\".format(\"" + t.replaceAll("\n", "\\\\n").replaceAll("x", "s") + ")";
 			break;
 		}
-		case C_SHARP : {
+		case TongueTwister.C_SHARP : {
 			for (int i = 0; i < parts.length; i++)
 					t = t.replaceAll(parts[i], "{" + i + "}");
 			t += "\"";
@@ -42,7 +39,7 @@ public class Solution implements Comparable<Solution> {
 			sol = "Write(@\"" + t + ")";
 			break;
 		}
-		case PYTHON3 : { //replace them with corresponding symbol
+		case TongueTwister.PYTHON3 : { //replace them with corresponding symbol
 			for (int i = 0; i < parts.length; i++)
 				t = t.replaceAll(parts[i], "" + i);
 			t += "\".translate([\"";
@@ -53,6 +50,18 @@ public class Solution implements Comparable<Solution> {
 				t += ",\"" + parts[i] + "\"";
 			sol = "print(\"" + t.replaceAll("\n", "\\\\n").replaceAll("0", "" + parts.length) + "]*2))";
 			break;
+		}
+		case TongueTwister.PYTHON2 : {
+			for (int i = 0; i < parts.length; i++)
+				t = t.replaceAll(parts[i], "{" + i + "}");
+		t += "\".format(\"";
+
+		if (parts.length > 0)
+			t += parts[0] + "\"";
+		for (int i = 1; i < parts.length; i++)
+			t += ",\"" + parts[i] + "\"";
+		sol = "print\"" + t.replaceAll("\n", "\\\\n") + ")";
+		break;
 		}
 		}
 

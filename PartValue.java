@@ -15,13 +15,13 @@ public class PartValue implements Comparable<PartValue> {
 		//			(word - $s)														,"word"
 
 		switch (type) {
-		case Solution.JAVA :
+		case TongueTwister.JAVA :
 			this.weight = (string.length() - 2) * freq - (string.length() + 3); //2 or 4
 			break;
-		case Solution.C_SHARP :
+		case TongueTwister.PYTHON2 : case TongueTwister.C_SHARP :
 			this.weight = (string.length() - 3) * freq - (string.length() + 3);
 			break;
-		case Solution.PYTHON3 :
+		case TongueTwister.PYTHON3 :
 			this.weight = (string.length() - 1) * freq - (string.length() + 3);
 			break;
 		}
