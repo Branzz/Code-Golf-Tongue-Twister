@@ -30,8 +30,9 @@ v->"".format("S%sells by%s shells she sells are seashells, I'm sure.\nSo if s%1$
 
 	}
 
-	//Change versions here:
-	private final static int VERSION = Solution.PYTHON3;
+	//Change versions here: "JAVA", "C_SHARP", "PYTHON3"
+	private final static int VERSION = Solution.JAVA;
+
 	private final static String TEXT = "She sells seashells by the seashore,\nThe shells she sells are seashells, I'm sure.\nSo if she sells seashells on the seashore,\nThen I'm sure she sells seashore shells.";
 
 	private static ArrayList<Solution> solutions; //All solutions (Purpose: to check for repeat and not recheck entire branches)
