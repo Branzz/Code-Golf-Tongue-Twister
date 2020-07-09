@@ -9,7 +9,7 @@ public class PartValue implements Comparable<PartValue> {
 		super();
 		this.string = string;
 		this.freq = freq;
-		this.weight = (string.length() - 2) * freq - (string.length() + 3);
+		this.weight = (string.length() - 2) * freq - (string.length() + 3); //Predicted amount it will decrease the code
 	}
 
 	public String getString() {
